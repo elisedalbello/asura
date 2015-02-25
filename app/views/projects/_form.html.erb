@@ -10,7 +10,11 @@
       </ul>
     </div>
   <% end %>
-
+  <ul>
+<% @project.users.each do |user| %>
+    <li> <%= user.email %></li>
+<% end %>
+</ul>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
