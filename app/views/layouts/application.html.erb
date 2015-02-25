@@ -8,8 +8,9 @@
 </head>
 <body>
 
+<h1><%= link_to 'Asura', root_path %></h1>
 <%= current_user.email %>
-
+<%= link_to 'My Projects', projects_path %>
 <%= yield %>
 
 </body>
