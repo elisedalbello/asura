@@ -7,11 +7,21 @@
 
 <ul>
 <% @project.improvements.each do |change| %>
-	<li>change.name</li>
+	<li><%= change.name %></li>
 <% end %>
 </ul>
 
-<%= render '/improvements/form' %>
+<%= form_for([@project, @project.improvements.build]) do |f| %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

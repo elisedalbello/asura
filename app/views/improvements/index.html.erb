@@ -15,7 +15,7 @@
       <tr>
         <td><%= improvement.name %></td>
         <td><%= link_to 'Show', improvement %></td>
-        <td><%= link_to 'Edit', edit_improvement_path(improvement) %></td>
+        <td><%= link_to 'Edit', edit_project_improvements_path(improvement) %></td>
         <td><%= link_to 'Destroy', improvement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Improvement', new_improvement_path %>
+<%= link_to 'New Improvement', new_project_improvements_path %>

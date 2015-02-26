@@ -1,40 +1,24 @@
 class ImprovementsController < ApplicationController
   before_action :set_improvement, only: [:show, :edit, :update, :destroy]
 
-  # GET /improvements
-  # GET /improvements.json
   def index
     @improvements = Improvement.all
   end
 
-  # GET /improvements/1
-  # GET /improvements/1.json
   def show
   end
 
-  # GET /improvements/new
   def new
     @improvement = Improvement.new
   end
 
-  # GET /improvements/1/edit
   def edit
   end
 
-  # POST /improvements
-  # POST /improvements.json
   def create
-    @improvement = Improvement.new(improvement_params)
-
-    respond_to do |format|
-      if @improvement.save
-        format.html { redirect_to @improvement, notice: 'Improvement was successfully created.' }
-        format.json { render :show, status: :created, location: @improvement }
-      else
-        format.html { render :new }
-        format.json { render json: @improvement.errors, status: :unprocessable_entity }
-      end
-    end
+    @project = Project.find(params[:project_id])
+    @improvement = @project.improvements.create(improvement_params)
+    redirect_to @project, notice: 'Improvement was successfully created.'
   end
 
   # PATCH/PUT /improvements/1
