@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226003824) do
+ActiveRecord::Schema.define(version: 20150226025244) do
 
   create_table "improvements", force: :cascade do |t|
     t.string   "name"
@@ -22,11 +22,23 @@ ActiveRecord::Schema.define(version: 20150226003824) do
 
   add_index "improvements", ["project_id"], name: "index_improvements_on_project_id"
 
-  create_table "items", force: :cascade do |t|
+  create_table "information", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "item_id"
   end
+
+  add_index "information", ["item_id"], name: "index_information_on_item_id"
+
+  create_table "items", force: :cascade do |t|
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "state_id"
+  end
+
+  add_index "items", ["state_id"], name: "index_items_on_state_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -39,11 +51,14 @@ ActiveRecord::Schema.define(version: 20150226003824) do
     t.integer "project_id", null: false
   end
 
-  create_table "statuses", force: :cascade do |t|
+  create_table "states", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "improvement_id"
   end
+
+  add_index "states", ["improvement_id"], name: "index_states_on_improvement_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
