@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.field {
+	@extend .form-group;
+	input {
+		@extend .form-control;
+	}
+}

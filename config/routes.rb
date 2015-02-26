@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
 
   get 'welcome/index'
 
@@ -7,6 +6,7 @@ Rails.application.routes.draw do
   resources :projects do 
     resources :improvements do
       post 'items', to: 'items#create'
+      post 'states', to: 'states#create'
     end
   end
 

@@ -1,29 +1,63 @@
 <p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Name:</strong>
-  <%= @project.name %>
+<strong>Name:</strong>
+<%= @project.name %>
 </p>
+<div class="row">
+    <div class="col-md-8">
+        <h2>Improvements</h2>
+    </div>
+    <div class="col-md-4">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#improvement-form">
+        Create Improvement
+        </button>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+        <th>
+            Name
+        </th>
+        <th></th>
+    </thead>
+    <% @project.improvements.each do |improvement| %>
+    <tr>
+        <td>
+            <%= improvement.name %>
+        </td>
+        <td>
+            <%= link_to 'Show', project_improvement_path(@project, improvement) %> |
+        </td>
+    </tr>
+    <% end %>
+</table>
 
-<ul>
-<% @project.improvements.each do |improvement| %>
-	<li>
-	<%= improvement.name %>
-	<%= link_to 'Show', project_improvement_path(@project, improvement) %> |
-	</li>
-<% end %>
-</ul>
+<div class="modal fade" id="improvement-form">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                <%= form_for([@project, @project.improvements.build]) do |f| %>   
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Improvement</h4>
+            </div>
+            
+            <div class="modal-body">
+        
+                <div class="field">
+                    <%= f.label :name %><br>
+                    <%= f.text_field :name %>
+                </div>
+                
+            </div>
+            
+            <div class="modal-footer">
+                <%= f.submit 'Save', :class => 'btn btn-primary' %>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        <% end %>
+        </div>
+    </div>
+</div>
 
-<%= form_for([@project, @project.improvements.build]) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+            <%= link_to 'Edit', edit_project_path(@project) %> |
+            <%= link_to 'Back', projects_path %>

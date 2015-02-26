@@ -5,6 +5,28 @@
   <%= @improvement.name %>
 </p>
 
+ <table>
+  	<thead>
+  		<th>Description</th>
+  	</thead>
+    <% @improvement.states.each do |state| %>
+      <tr>
+      	<td>
+        <%= state.name %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<%= form_for([@project, @improvement, @improvement.states.build]) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
   <table>
   	<thead>
   		<th>Description</th>
@@ -24,12 +46,15 @@
     <% end %>
   </table>
 
+
 <%= form_for([@project, @improvement, @improvement.items.build]) do |f| %>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
-  <%= select("item", "state_id", @improvement.states.collect {|s| [ s.name, s.id ] }, {include_blank: false}) %>
+  
+  <%= select("item", "state_id", State.all.collect {|s| [ s.name, s.id ] }) %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
