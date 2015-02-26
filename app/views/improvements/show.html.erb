@@ -5,19 +5,31 @@
   <%= @improvement.name %>
 </p>
 
-  <ul>
+  <table>
+  	<thead>
+  		<th>Description</th>
+  		<th>State</th>
+  	</thead>
     <% @improvement.items.each do |item| %>
-      <li>
+      <tr>
+      	<td>
         <%= item.description %>
-      </li>
+        </td>
+        <td>
+        <% unless item.state.nil? %>
+        	<%= item.state.name %>
+    	<% end %>    	
+        </td>
+      </tr>
     <% end %>
-  </ul>
+  </table>
 
 <%= form_for([@project, @improvement, @improvement.items.build]) do |f| %>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
+  <%= select("item", "state_id", @improvement.states.collect {|s| [ s.name, s.id ] }, {include_blank: false}) %>
   <div class="actions">
     <%= f.submit %>
   </div>
