@@ -14,9 +14,9 @@
     <% @improvements.each do |improvement| %>
       <tr>
         <td><%= improvement.name %></td>
-        <td><%= link_to 'Show', improvement %></td>
-        <td><%= link_to 'Edit', edit_project_improvements_path(improvement) %></td>
-        <td><%= link_to 'Destroy', improvement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', improvement , {:class => 'btn btn-primary'}%></td>
+        <td><%= link_to 'Edit', edit_project_improvements_path(improvement), {:class => 'btn btn-warning'} %></td>
+        <td><%= link_to 'Destroy', improvement, method: :delete, data: { confirm: 'Are you sure?' }, {:class => 'btn btn-danger'} %></td>
       </tr>
     <% end %>
   </tbody>
