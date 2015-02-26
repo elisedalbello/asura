@@ -1,10 +1,10 @@
-<%= form_for(@change) do |f| %>
-  <% if @change.errors.any? %>
+<%= form_for(@improvement) do |f| %>
+  <% if @improvement.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@change.errors.count, "error") %> prohibited this change from being saved:</h2>
+      <h2><%= pluralize(@improvement.errors.count, "error") %> prohibited this improvement from being saved:</h2>
 
       <ul>
-      <% @change.errors.full_messages.each do |message| %>
+      <% @improvement.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
