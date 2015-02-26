@@ -6,13 +6,15 @@
 </p>
 
 <ul>
-<% @project.improvements.each do |change| %>
-	<li><%= change.name %></li>
+<% @project.improvements.each do |improvement| %>
+	<li>
+	<%= improvement.name %>
+	<%= link_to 'Show', project_improvement_path(@project, improvement) %> |
+	</li>
 <% end %>
 </ul>
 
 <%= form_for([@project, @project.improvements.build]) do |f| %>
-
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -21,7 +23,6 @@
     <%= f.submit %>
   </div>
 <% end %>
-
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
