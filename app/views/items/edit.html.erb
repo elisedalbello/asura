@@ -1,0 +1,10 @@
+<%= form_for([@project, @improvement, @item]) do |f| %>
+    <div class="field">
+        <%= f.label :description %><br>
+        <%= f.text_field :description %>
+    </div>
+    <div class="field">
+        <%= select("item", "state_id", State.all.collect {|s| [ s.name, s.id ] }) %>
+    </div>
+    <%= f.submit 'Save', :class => 'btn btn-primary' %>
+<% end %>
