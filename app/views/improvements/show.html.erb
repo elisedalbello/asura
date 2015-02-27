@@ -60,6 +60,7 @@
         </button>
     </div>
 </div>
+
 <table class="table table-striped">
     <thead>
         <th>Description</th>
@@ -70,6 +71,9 @@
     <tr>
         <td>
             <%= item.description %>
+            <% item.information.collect do |info| %>
+            <%= info.value %>
+            <% end %>
         </td>
         <td>
             <% unless item.state.nil? %>
