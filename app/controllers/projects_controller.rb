@@ -29,11 +29,9 @@ class ProjectsController < ApplicationController
     @project.users.push(current_user)
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
+        format.html { redirect_to projects_path, notice: 'Project was successfully created.' }
       else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.html { render :index }
       end
     end
   end

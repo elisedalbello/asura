@@ -15,10 +15,18 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 
 .field {
 	@extend .form-group;
 	input, select {
 		@extend .form-control;
 	}
+}
+
+.label {
+	a {
+		color: #FFF;
+	}
+	margin-right: 10px;
 }

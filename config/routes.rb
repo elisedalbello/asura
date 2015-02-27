@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :projects do 
     resources :improvements do
-      post 'items', to: 'items#create'
-      post 'states', to: 'states#create'
+      resources :items
+      resources :states
     end
   end
 

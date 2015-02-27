@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
-<h1>
-<%= @project.name %>
-</h1>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'My Projects', projects_path %></li>
+  <li><%= link_to "#{@project.name}", @project %></li>
+</ol>
+
 <div class="row">
     <div class="col-md-8">
         <h2>Improvements</h2>
@@ -29,7 +32,7 @@
           <%= improvement.items.size %>
         </td>
         <td>
-            <%= link_to 'Show', project_improvement_path(@project, improvement), {:class => 'btn btn-info'} %>
+            <%= link_to 'View', project_improvement_path(@project, improvement), {:class => 'btn btn-primary'} %>
         </td>
     </tr>
     <% end %>

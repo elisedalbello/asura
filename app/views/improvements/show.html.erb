@@ -1,117 +1,116 @@
 <p id="notice"><%= notice %></p>
-
-<h1>
-  <%= @improvement.name %>
-</h1>
+<ol class="breadcrumb">
+    <li><%= link_to 'My Projects', projects_path %></li>
+    <li><%= link_to "#{@project.name}", @project %></li>
+    <li><%= link_to "#{@improvement.name}", [@project, @improvement] %></li>
+</ol>
 <div class="row">
-	<div class="col-md-8">
-		<h2>States</h2>
-	</div>
-	<div class="col-md-4">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#state-form">
+    <div class="col-md-8">
+        <h2>States</h2>
+    </div>
+    <div class="col-md-4">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#state-form">
         Add State
         </button>
-	</div>
+    </div>
 </div>
- <table class="table table-striped">
-  	<thead>
-  		<th>Description</th>
-  	</thead>
-    <% @improvement.states.each do |state| %>
-      <tr>
-      	<td>
-        <%= state.name %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
 
+<% @improvement.states.each do |state| %>
+<span class="label label-primary"><%= state.name %>
+  <%= link_to url_for([@project, @improvement, state]), 
+      method: :delete, data: { confirm: 'Are you sure?' } do %>
+    | &times;
+<% end %>
+</span>
+<% end %>
 
 <div class="modal fade" id="state-form">
     <div class="modal-dialog">
         <div class="modal-content">
-                <%= form_for([@project, @improvement, @improvement.states.build]) do |f| %>
+            <%= form_for([@project, @improvement, @improvement.states.build]) do |f| %>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">State</h4>
             </div>
-            
+
             <div class="modal-body">
-        
+
                 <div class="field">
                     <%= f.label :name %><br>
                     <%= f.text_field :name %>
                 </div>
-                
+
             </div>
-            
+
             <div class="modal-footer">
                 <%= f.submit 'Save', :class => 'btn btn-primary' %>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-        <% end %>
+            <% end %>
         </div>
     </div>
 </div>
-
-
 <div class="row">
-	<div class="col-md-8">
-		<h2>Items</h2>
-	</div>
-	<div class="col-md-4">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#item-form">
+    <div class="col-md-8">
+        <h2>Items</h2>
+    </div>
+    <div class="col-md-4">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#item-form">
         Add Item
         </button>
-	</div>
+    </div>
 </div>
-
-  <table class="table table-striped">
-  	<thead>
-  		<th>Description</th>
-  		<th>State</th>
-  	</thead>
+<table class="table table-striped">
+    <thead>
+        <th>Description</th>
+        <th>State</th>
+        <th></th>
+    </thead>
     <% @improvement.items.each do |item| %>
-      <tr>
-      	<td>
-        <%= item.description %>
+    <tr>
+        <td>
+            <%= item.description %>
         </td>
         <td>
-        <% unless item.state.nil? %>
-        	<%= item.state.name %>
-    	<% end %>    	
+            <% unless item.state.nil? %>
+            <%= item.state.name %>
+            <% end %>
         </td>
-      </tr>
+        <td>
+        <div class="button-group">
+          <%= link_to 'Edit', edit_project_improvement_item_path(@project, @improvement, item) , :class => 'btn btn-warning' %>
+          <%= link_to 'Delete', url_for([@project, @improvement, item]), 
+      method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </div>
+        </td>
+    </tr>
     <% end %>
-  </table>
-
-
+</table>
 <div class="modal fade" id="item-form">
     <div class="modal-dialog">
         <div class="modal-content">
-                <%= form_for([@project, @improvement, @improvement.items.build]) do |f| %>
+            <%= form_for([@project, @improvement, @improvement.items.build]) do |f| %>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">State</h4>
             </div>
-            
+
             <div class="modal-body">
-        
+
                 <div class="field">
-    				<%= f.label :description %><br>
-    				<%= f.text_field :description %>
-  				</div>
-  				<div class="field">
-  				<%= select("item", "state_id", State.all.collect {|s| [ s.name, s.id ] }) %>
-  				</div>
+                    <%= f.label :description %><br>
+                    <%= f.text_field :description %>
+                </div>
+                <div class="field">
+                    <%= select("item", "state_id", State.all.collect {|s| [ s.name, s.id ] }) %>
+                </div>
             </div>
-            
+
             <div class="modal-footer">
                 <%= f.submit 'Save', :class => 'btn btn-primary' %>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-        <% end %>
+            <% end %>
         </div>
     </div>
 </div>
-
